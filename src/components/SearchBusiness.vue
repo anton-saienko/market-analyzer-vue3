@@ -111,7 +111,7 @@ const setBusinessInfo = (coordinates: {lat: number, lng: number}, website: strin
     <div class="search-dropdown">
         <div class="search-loading" v-if="loadingResults">Loading...</div>
         <div class="search-item" v-for="p in places" :key="p.place_id" @click="selectPlace(p.place_id)">
-            <business-image @set-business-info="setBusinessInfo" :place-id="p.place_id"/>
+            <business-image @set-business-info="setBusinessInfo" :place-id="p.place_id" :places="places"/>
             <div class="item-text">
                 <span class="item-name">{{ p.structured_formatting.main_text }},</span>
                 <span class="item-city">{{ p.structured_formatting.secondary_text }}</span>

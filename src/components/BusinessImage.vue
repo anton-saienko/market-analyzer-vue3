@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import type { Place } from '@/types'
+import { ref, onMounted, watch } from 'vue'
 import { GOOGLE_MAP_API_KEY } from '@/constants'
 import { getPlaceInfo } from '@/api/search-business'
 
@@ -12,7 +13,8 @@ const emit = defineEmits<{
 
 //-- props
 const props = defineProps<{
-    placeId?: string
+    placeId?: string,
+    places?: Place[]
 }>()
 
 
@@ -20,8 +22,14 @@ const props = defineProps<{
 const imageLink = ref('')
 
 
+//-- watch
+watch(() => props.places, () => {
+    getImageAndInfo()
+})
+
+
 //-- methods
-const getImageLink = async () => {
+const getImageAndInfo = async () => {
     try {
         if (props.placeId) {
             const result = await getPlaceInfo(props.placeId)
@@ -41,7 +49,7 @@ const getImageLink = async () => {
 
 //-- hooks
 onMounted(() => {
-    getImageLink()
+    getImageAndInfo()
 })
 </script>
 
