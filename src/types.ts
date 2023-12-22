@@ -5,22 +5,19 @@ export type GoogleMapEvent = {
     }
 }
 
+export type Coordinates = {
+    lat: number,
+    lng: number
+}
+
 export type Place = {
     place_id: string,
     structured_formatting: {
         main_text: string,
         secondary_text: string
     },
-    coordinates: {
-        lat: number,
-        lng: number
-    },
+    coordinates: Coordinates,
     website: string
-}
-
-export type Coordinates = {
-    lat: number,
-    lng: number
 }
 
 export type BusinessObject = {
